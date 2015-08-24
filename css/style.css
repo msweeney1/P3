@@ -1,0 +1,86 @@
+
+body {
+    text-align: center;
+    display: -webkit-flex;
+    display: flex;
+    max-height: 100%;
+    font-family: "Lucida Grande";
+    font-weight:bold;
+}
+#arrow {
+	text-align: left;
+	align: left;
+	margin: 0;
+}
+#rules {
+	max-width: 30%;
+	display: -webkit-flex;
+	display:flex;
+	-webkit-flex-direction:column;
+	flex-direction:column;
+	padding: 1%;
+	text-align: left;
+
+}
+.timer, .life, .score, #high-score {
+	text-align: center;
+	padding: 2%;
+	margin:2%;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction:column;
+	flex-direction: column;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 10px;
+	border-color: #C4C4BB;
+	height: 95px;
+	width: 230px;
+	background-color: #DADAD0;
+}
+.life1{
+	diisplay:none;
+}
+.heart-image{
+	display: -webkit-flex;
+	display:flex;
+	-webkit-flex-direction:row;	
+	flex-direction:row;
+}
+
+.game-resources {
+	max-width: 100%;
+	margin:2%;
+	padding: 2%;
+	-webkit-flex-direction:row;
+	flex-direction:row;
+}
+.buttonControls {
+	text-align: left;
+	margin: 40px 0px 0px 40px;
+}
+
+#countdown{
+	
+	padding:2%;
+}
+#restart{
+	display:none;
+}
+#high-score{
+
+	display:none;
+}
+#new-high-score {
+	background-color: #566DD6;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 10px;
+}
+#score-high, #score {
+	text-align: center;
+}
+
+ul {
+	text-align: left;
+}
