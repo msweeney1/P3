@@ -193,7 +193,7 @@ Enemy.prototype.update = function(dt) {
         if (rand1==1) this.y=145;
         if (rand1==2) this.y=225;
     }
-}
+};
 
 
 /**
@@ -262,7 +262,7 @@ Player.prototype.update = function(dt) {
      * Loop through all bugs in allEnemies and check if player collides with any.
      */
     for (enemyBug in allEnemies){
-        bug={
+        var bug={
              'top':   allEnemies[enemyBug].y+SLIDE_BUG_Y,
              'bottom': allEnemies[enemyBug].y+SLIDE_BUG_Y+BUG_HEIGHT,
              'right': allEnemies[enemyBug].x+BUG_WIDTH-20,
@@ -270,7 +270,7 @@ Player.prototype.update = function(dt) {
         };
 
         if(!(player1.left>(bug.right-10) || player1.right < (bug.left+10) ||player1.top>=(bug.bottom-10) || player1.bottom <=(bug.top+10))) {
-            handleEnemyCollision();
+            this.handleEnemyCollision();
             break;//avoid multiple life loss
         }
 
@@ -279,7 +279,7 @@ Player.prototype.update = function(dt) {
      * Check for Gem Collision with player. Loop through all gems.
      */
     for (gem in allGems) {
-        gem1={
+        var gem1={
              'top':   allGems[gem].y+40,//adjust for start for gem image..25
              'bottom': allGems[gem].y+80,//block height is gem height..so if player is in that block
              'right': allGems[gem].x+GEM_WIDTH,

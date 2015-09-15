@@ -25,7 +25,9 @@ body {
 
 }
 
-.timer, .life, .score, #high-score {
+.timer,
+.life,
+.score, #high-score {
 	text-align: center;
 	padding: 2%;
 	margin:2%;
@@ -43,7 +45,7 @@ body {
 }
 
 .life1{
-	diisplay:none;
+	diisplay: none;
 }
 
 .heart-image{
@@ -81,7 +83,7 @@ body {
 }
 
 #new-high-score {
-	background-color: #566DD6;
+	background-color: #566dd6;
 	text-align: center;
 	font-weight: bold;
 	border-radius: 10px;
