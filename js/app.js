@@ -1,5 +1,5 @@
 /**
- * @fileoverview This files defines the Enemy, Player and Gem classes and instantiates objects of these 
+ * @fileoverview This files defines the Enemy, Player and Gem classes and instantiates objects of these
  * classes to implement game functionality.
  */
 
@@ -7,64 +7,64 @@
 
 /**
  * Height of each element (grass,water,block/road) in the map
- * @const {number} 
+ * @const {number}
  */
 var BLOCK_HEIGHT=80;
 
 /**
  * Player moves 80 px vertically across the canvas in each step
- * @const {number} 
+ * @const {number}
  */
 var STEP_Y=80;
 
 /**
  * Player moves 95 pixels horizontally across the canvas in each step
- * @const {number} 
+ * @const {number}
  */
 var STEP_X=95;
 
 /**
  * Height and width of bug to check for collision
  * @const {number}
- * @const {number} 
+ * @const {number}
  */
 var BUG_HEIGHT=70;
 var BUG_WIDTH=101;
 
 /**
  * Randomly choose bug speeds from this array
- * @const {Array.number} 
+ * @const {Array.number}
  */
-var BUG_SPEED =[80,100,120]; 
+var BUG_SPEED =[80,100,120];
 
 /**
  * Maximum number of bugs in the game
- * @const {number} 
+ * @const {number}
  */
-var MAX_BUGS=3; 
+var MAX_BUGS=3;
 
 /**
  * Actual bug image starts after 75 pixels down vertically in the sprite
- * @const {number} 
+ * @const {number}
  */
 var SLIDE_BUG_Y=75;
 
 /**
  * Records high scores of player across game loops
- * @type {number} 
+ * @type {number}
  */
 var HIGH_SCORE=0;
 
 /**
  * Control variable to specify pause state of game
- * @type {boolean} 
+ * @type {boolean}
  */
 var PAUSED=true;
 
 /**
  * Initial X and Y position of player
  * @const {number}
- * @const {number} 
+ * @const {number}
  */
 var INITIAL_X_PLAYER=200;
 var INITIAL_Y_PLAYER=400;
@@ -72,9 +72,9 @@ var INITIAL_Y_PLAYER=400;
 /**
  * Height and width of player to check for collision
  * @const {number}
- * @const {number} 
+ * @const {number}
  */
-var PLAYER_HEIGHT=80; 
+var PLAYER_HEIGHT=80;
 var PLAYER_WIDTH=75;
 
 /**
@@ -87,7 +87,7 @@ var SLIDE_PLAYER_X=15;
  * Actual player image starts after 75 pixels down vertically in the sprite
  * @const {Number}
  */
-var SLIDE_PLAYER_Y=60; 
+var SLIDE_PLAYER_Y=60;
 
 /**
  * Game is over when time runs out or player looses all lives
@@ -96,8 +96,8 @@ var SLIDE_PLAYER_Y=60;
 var GAME_OVER=false;
 
 /**
- * maximum number of gems at any given time. 
- * When player takes all gems displayed, new ones are shown.  
+ * maximum number of gems at any given time.
+ * When player takes all gems displayed, new ones are shown.
  * @const {Number}
  */
 var MAX_GEMS=3;
@@ -129,7 +129,7 @@ var allEnemies= [];
 var allGems=[];
 
 /**
- * Time in seconds for one game loop  
+ * Time in seconds for one game loop
  * @const {Number}
  */
 var MAX_TIME=30;
@@ -153,7 +153,7 @@ var TIMES_UP=false;
 var LIVES_UP=false;
 
 /**
- * ENEMY CLASS. This class defines the features and implements the functionality of 
+ * ENEMY CLASS. This class defines the features and implements the functionality of
  * 'enemy/bugs' in the game.
  * @param {number} x Represents the horizontal x-axis position of enemy on canvas.
  * @param {number} y Represents the vertical y-axis position of enemy on canvas
@@ -170,7 +170,7 @@ var Enemy = function(x,y,speed) {
     this.x=x;
     this.y=y;
     this.speed=speed;
-}
+};
 
 /**
  * Update the enemy's position
@@ -181,14 +181,14 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     if (!PAUSED) this.x=this.x+this.speed*dt;
-    
+
     if (this.x>=CANVAS_WIDTH) {
         this.x=0; // reset enemy to the left of the canvas
-       
-        //generate a random number between 0 and 3 
+
+        //generate a random number between 0 and 3
         //to decide what row the bug re-appears from
         var rand1=generateRandom(3,0);
-       
+
         if (rand1==0) this.y=65;
         if (rand1==1) this.y=145;
         if (rand1==2) this.y=225;
@@ -205,11 +205,11 @@ Enemy.prototype.render = function() {
 }
 
 /**
- * Player Class. This class defines the features and implements the functionality of 
+ * Player Class. This class defines the features and implements the functionality of
  * player in the game.
  * @param {number} x Represents the horizontal x-axis position of player on canvas.
  * @param {number} y Represents the vertical y-axis position of player on canvas
- * @param {number} maxLife Represents the maximum number of lives player has in one 
+ * @param {number} maxLife Represents the maximum number of lives player has in one
      run of the game.
  * @param {number} score Represents score of the player.
  * @constructor
@@ -230,7 +230,7 @@ var Player=function(x,y,maxLife,score){
      * @type {Number}
      */
     this.lives=maxLife;
-    
+
 }
 /**
  * Update the position of the player, check for collision with enemy to reset player
@@ -241,7 +241,7 @@ Player.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    
+
     /**
      * Format for defining the bounding rectangle for player and bug to check for collision
      * r1 = {
@@ -252,7 +252,7 @@ Player.prototype.update = function(dt) {
      * };
      * @type {Object}
      */
-    player1= {
+    var player1= {
          'top':   this.y+SLIDE_PLAYER_Y,
          'bottom': this.y+SLIDE_PLAYER_Y+PLAYER_HEIGHT,
          'right': this.x+SLIDE_PLAYER_X+PLAYER_WIDTH,
@@ -270,7 +270,7 @@ Player.prototype.update = function(dt) {
         };
 
         if(!(player1.left>(bug.right-10) || player1.right < (bug.left+10) ||player1.top>=(bug.bottom-10) || player1.bottom <=(bug.top+10))) {
-            handleEnemyCollision();       
+            handleEnemyCollision();
             break;//avoid multiple life loss
         }
 
@@ -286,7 +286,7 @@ Player.prototype.update = function(dt) {
              'left': allGems[gem].x
         };
         if(allGems[gem].visible) { //if the hit gem is visible
-            if(!(player1.left>(gem1.right) || player1.right < (gem1.left) ||player1.top>(gem1.bottom) || player1.bottom <(gem1.top))) {    
+            if(!(player1.left>(gem1.right) || player1.right < (gem1.left) ||player1.top>(gem1.bottom) || player1.bottom <(gem1.top))) {
                //increase score
                 this.score+=5;
                 //UPDATE SCORE
@@ -323,7 +323,7 @@ Player.prototype.handleInput = function(keycode) {
                 break;
             case 'down':
                 newpos=this.y+STEP_Y;
-                this.y= (newpos<=INITIAL_Y_PLAYER) ? newpos : INITIAL_Y_PLAYER;  
+                this.y= (newpos<=INITIAL_Y_PLAYER) ? newpos : INITIAL_Y_PLAYER;
                 break;
             case 'left':
                 newpos=this.x-STEP_X;
@@ -332,8 +332,8 @@ Player.prototype.handleInput = function(keycode) {
             case 'right':
                 newpos=this.x+STEP_X;
                 //incorpotate for the point where the actual image starts
-                if((newpos+SLIDE_PLAYER_X +PLAYER_WIDTH)<=CANVAS_WIDTH) this.x=newpos;   
-        } 
+                if((newpos+SLIDE_PLAYER_X +PLAYER_WIDTH)<=CANVAS_WIDTH) this.x=newpos;
+        }
     }
 }
 /**
@@ -375,17 +375,17 @@ Gems.prototype.update=function(){
     if (allgone==allGems.length){//generate random positions and make gems visible
         for ( g in allGems){
             //select random x position i.e one of the five blocks in a row
-            var randX=generateRandom(5,0);    
+            var randX=generateRandom(5,0);
             //select random y position i.e what row to show bug in
             var randY=generateRandom(3,0);
             //select random color for the bug
             var rand2=generateRandom(3,0);
-            
+
             allGems[g].visible=true;
             allGems[g].x=randX*GEM_WIDTH;
             allGems[g].y=GEM_Y_LOCATIONS[randY];
             allGems[g].sprite='images/Gem'+GEM_COLORS[rand2]+'.png';
-        }    
+        }
     }
 }
 /**
@@ -403,14 +403,14 @@ Gems.prototype.render=function(){
  * Place the player object in a variable called player
  * @type {Player}
  */
-var player= new Player(INITIAL_X_PLAYER,INITIAL_Y_PLAYER,5,0);    
+var player= new Player(INITIAL_X_PLAYER,INITIAL_Y_PLAYER,5,0);
  //create enemy bugs, gems and push them to the global allEnemies, allGems array
 
 /**
  * Load heart images to represent life
  * @type {String}
  */
-var HTML_Life="<img class='life1' src='images/Heart.png' height='15%' width='15%'>"; 
+var HTML_Life="<img class='life1' src='images/Heart.png' height='15%' width='15%'>";
 /**
  * Dsiplay msxLife hearts and append to DOM
  */
@@ -429,14 +429,14 @@ function instantiateGameObjects() {
         var randX=generateRandom((CANVAS_WIDTH-BUG_WIDTH),0);
         //select a random index to choose speed of the bug from the array BUG_SPEED
         var rand2=generateRandom(3,0);
-        
+
         //select random y position i.e what row to show bug in
         var randY=generateRandom(3,0);//generate a number in the range [0,3) to pick from on the three rows in the map
         var y;
         if (randY==0) y=65; //y location for the first row
         if (randY==1) y=145; //y location for the second row
         if (randY==2) y=225; //y location for the third row
-        
+
         //start bugs from the left of the canvas, makes the game easier to play instead of a random location
         var enemy1= new Enemy(0,y,BUG_SPEED[rand2]);
         allEnemies.push(enemy1);
@@ -445,14 +445,14 @@ function instantiateGameObjects() {
     for (i=0; i<MAX_GEMS;i++) {
         //generate a random x position in the row from the five blocks in each row
         var randX=generateRandom(4,0);
-        
+
         //select random y position i.e what row to show gem in
         var randY=generateRandom(3,0);
-    
-        //select random index to choose color from the GEM_COLORS array 
+
+        //select random index to choose color from the GEM_COLORS array
         var rand2=generateRandom(3,0);
 
-        //last argument initially make the gem visible    
+        //last argument initially make the gem visible
         var gem1= new Gems(GEM_COLORS[rand2],randX*GEM_WIDTH,GEM_Y_LOCATIONS[randY],true);
         allGems.push(gem1);
     }
@@ -464,35 +464,35 @@ function instantiateGameObjects() {
  * Handle Collision with Enemy, player set to initial position, lives decreased by 1
  * Checks if game over in case player runs out of lives. Called by Player.prototype.Update()
  */
-function handleEnemyCollision(){
-    //reset to initial player position
-    player.x=INITIAL_X_PLAYER;
-    player.y=INITIAL_Y_PLAYER;
+ Player.prototype.handleEnemyCollision = function() {
+     //reset to initial player position
+     this.x = INITIAL_X_PLAYER;
+     this.y = INITIAL_Y_PLAYER;
      //decrease life hearts
-    player.lives=player.lives-1;
-    //find the last visible child (heart) and make it invisible
-    $(".heart-img").find(":visible:last").hide(); 
-    
-    if (player.lives==0) { //player has used all lives and the game loop is over
-        PAUSED=true; //to freeze game objects
-        
-        //disable Pause/Play Button and enable Start/restart Button
-        $("#restartStartButton").prop("disabled",false);
-        $("#pausePlayButton").prop("disabled",true);
-        
-        GAME_OVER=true;
-        LIVES_UP=true;
-         //display high score   
-        if (player.score>HIGH_SCORE) {
-            $("#new-high-score").show();
-            HIGH_SCORE=player.score;
-            $("#high-score").show();
-            $("#scoreHigh").html(HIGH_SCORE);
-        }
-    }
-}
+     this.lives = this.lives - 1;
+     //find the last visible child (heart) and make it invisible
+     $('.heart-img').find(':visible:last').hide();
+
+     if (this.lives == 0) { //player has used all lives and the game loop is over
+         PAUSED = true; //to freeze game objects
+
+         //disable Pause/Play Button and enable Start/restart Button
+         $('#restartStartButton').prop('disabled', false);
+         $('#pausePlayButton').prop('disabled', true);
+
+         GAME_OVER = true;
+         LIVES_UP = true;
+         //display high score
+         if (this.score > HIGH_SCORE) {
+             $('#new-high-score').show();
+             HIGH_SCORE = player.score;
+             $('#high-score').show();
+             $('#scoreHigh').html(HIGH_SCORE);
+         }
+     }
+ };
 /**
- * Generate a random Rumber between 'x' and 'y' 
+ * Generate a random Rumber between 'x' and 'y'
  */
 function generateRandom(x,y) {
     return Math.floor(Math.random() *x + y);
@@ -502,8 +502,8 @@ function generateRandom(x,y) {
 /**
  * Call back function when Pause/Play button is pressed.
  * Set the PAUSE variable to control the and rename Pause/Play button.
- *  Player has one button to Pause or Play the Game. When the game is running, 
- * the button displays 'Pause', when the user clicks 'Pause', the game is paused 
+ *  Player has one button to Pause or Play the Game. When the game is running,
+ * the button displays 'Pause', when the user clicks 'Pause', the game is paused
  * and the button label changes to 'Play'.
  * Now the player can press 'Play' to resume the game.
  */
@@ -512,49 +512,49 @@ function gamePause() {
     if($("#pausePlayButton").html()=='Play'){
         PAUSED=false;
         ctx.globalAlpha=1; //restore normal display
-        $("#pausePlayButton").html('Pause');//re-label button to Pause        
+        $("#pausePlayButton").html('Pause');//re-label button to Pause
     }
     //Game in play and player wants to pause
     else if($("#pausePlayButton").html()=='Pause'){
         PAUSED=true;
         ctx.globalAlpha=0.5;//change opacity of canvas to indicate pause state
         $("#pausePlayButton").html('Play');
-    }    
+    }
 }
 
 /**
- * Resets games to display all lives, reset score ,reset player position. 
+ * Resets games to display all lives, reset score ,reset player position.
  * Called by gameStartRestart()
  */
 function gameReset() {
     $(".life1").show();//show all lives i.e. heart images
     //reset SCORE & player.lives
-    player.score=0; 
+    player.score=0;
     player.lives=player.maxLife;
-    $("#score").html("<p id='score'>"+player.score+'</p>');//Display SCORE 
+    $("#score").html("<p id='score'>"+player.score+'</p>');//Display SCORE
     //reset player to original position
-    player.x=INITIAL_X_PLAYER; 
+    player.x=INITIAL_X_PLAYER;
     player.y=INITIAL_Y_PLAYER;
 }
 
 /**
-* Call back function for the setInterval(...) method. 
+* Call back function for the setInterval(...) method.
 * Called every second to update the Game timer.
 * Checks if player ran out of time and updates game state variables
 */
 function displayTimer() {
     if(!PAUSED) {//if game is paused do not decrement the timer
         timerLoop--;
-        
-        $("#countdown").html("<h1 id='countdown1'>"+timerLoop+'</h1>'); 
-        
+
+        $("#countdown").html("<h1 id='countdown1'>"+timerLoop+'</h1>');
+
         if (timerLoop==0) { //game loop is over
             TIMES_UP=true;
             PAUSED=true;//control variable to stop the motion of game objects is set to true
             GAME_OVER=true; //bugs and gems to stop displaying
             player.x=INITIAL_X_PLAYER;
             player.y=INITIAL_Y_PLAYER;
-            
+
             //disable  Play/Pause Button and Enable Start/Restart Button
             $("#restartStartButton").prop("disabled",false);
             $("#pausePlayButton").prop("disabled",true);
@@ -565,7 +565,7 @@ function displayTimer() {
                 $("#high-score").show();
                 $("#scoreHigh").html(HIGH_SCORE);
             }
-        } 
+        }
     }
 }
 /**
@@ -578,7 +578,7 @@ function gameStartRestart(){
      GAME_OVER=false;
      TIMES_UP=false;
      LIVES_UP=false;
-    
+
     //update Timer
     $("#countdown").html("<h1 id='countdown1'>"+timerLoop+'</h1>');
     //empty all gems and enemies array and recreate them
@@ -587,26 +587,26 @@ function gameStartRestart(){
     }
     while(allGems.length > 0) {
           allGems.pop();
-    }       
+    }
 
     instantiateGameObjects();//recreate bugs and gems
-    
+
     gameReset();//reset game
     //enable play/pause and disable start/restart button
     $("#pausePlayButton").prop("disabled",false);
     $("#restartStartButton").prop("disabled",true);
-    
+
     //switch the button labels between Start and Restart
     if($("#restartStartButton").html()=="Start") {
-        $("#restartStartButton").html("Restart");        
+        $("#restartStartButton").html("Restart");
     }
     else if($("#restartStartButton").html()=='ReStart') {
-        $("#restartStartButton").html('Start'); 
+        $("#restartStartButton").html('Start');
     }
     $("#new-high-score").hide();
 }
 
-/** 
+/**
  * This listens for key presses and sends the keys to your
  * Player.handleInput() method. You don't need to modify this.
  */
@@ -620,5 +620,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-    

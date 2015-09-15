@@ -7,11 +7,13 @@ body {
     font-family: "Lucida Grande";
     font-weight:bold;
 }
+
 #arrow {
 	text-align: left;
 	align: left;
 	margin: 0;
 }
+
 #rules {
 	max-width: 30%;
 	display: -webkit-flex;
@@ -22,6 +24,7 @@ body {
 	text-align: left;
 
 }
+
 .timer, .life, .score, #high-score {
 	text-align: center;
 	padding: 2%;
@@ -38,13 +41,15 @@ body {
 	width: 230px;
 	background-color: #DADAD0;
 }
+
 .life1{
 	diisplay:none;
 }
+
 .heart-image{
 	display: -webkit-flex;
 	display:flex;
-	-webkit-flex-direction:row;	
+	-webkit-flex-direction:row;
 	flex-direction:row;
 }
 
@@ -55,28 +60,33 @@ body {
 	-webkit-flex-direction:row;
 	flex-direction:row;
 }
+
 .buttonControls {
 	text-align: left;
 	margin: 40px 0px 0px 40px;
 }
 
 #countdown{
-	
+
 	padding:2%;
 }
+
 #restart{
 	display:none;
 }
+
 #high-score{
 
 	display:none;
 }
+
 #new-high-score {
 	background-color: #566DD6;
 	text-align: center;
 	font-weight: bold;
 	border-radius: 10px;
 }
+
 #score-high, #score {
 	text-align: center;
 }
