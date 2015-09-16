@@ -491,6 +491,15 @@ function instantiateGameObjects() {
          }
      }
  };
+
+ // update the player's positions on the gameboard
+Player.prototype.update = function() {
+// when the player gets to the water, move it back to its start position
+    if (this.y == -10) {
+        this.start();
+    }
+};
+
 /**
  * Generate a random Rumber between 'x' and 'y'
  */
